@@ -51,10 +51,4 @@ public class WebSteps {
                 () -> $$(".prc-Text-Text-0ima0").findBy(Condition.text(issue)).shouldBe(Condition.visible));
 
     }
-
-    @Attachment(value = "Screenshot", type = "image/png", fileExtension = "png")
-    public byte[] takeScreenshot()
-    {
-        return ((TakesScreenshot) WebDriverRunner.getWebDriver()).getScreenshotAs(OutputType.BYTES);
-    }
 }

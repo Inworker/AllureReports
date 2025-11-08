@@ -1,5 +1,6 @@
 package qa;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.*;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -7,10 +8,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 
-public class StaticLabelsTest {
+public class SelenideTest {
 
 
     private static final String REPOSITORY = "Inworker/AllureReports";
@@ -26,7 +27,6 @@ public class StaticLabelsTest {
                 () -> open("https://github.com/" + REPOSITORY));
     }
 
-
     @Test
     @Feature("Issue в репозитории")
     @Story("Переход к Issue")
@@ -34,12 +34,10 @@ public class StaticLabelsTest {
     @Severity(SeverityLevel.BLOCKER)
     @Link(value = "Testing", url = "https://testing.github.com")
     @DisplayName("Переход к Issue неавторизованного пользователя")
-    public void testStaticLabels() {
-        WebSteps steps = new WebSteps();
-        steps.takeScreenshot();
-        steps.openIssuesTab();
-        steps.shouldSeeIsueWithNumber(ISSUE);
-        steps.checkTabIssue(ISSUE);
+    public void testSelenide() {
+        $("#issues-tab [data-content='Issues']").click();
+        $("a[href='/Inworker/AllureReports/issues/1']").shouldHave(Condition.exactText(ISSUE));
+        $$(".prc-Text-Text-0ima0").findBy(Condition.text(ISSUE)).shouldBe(Condition.visible);
     }
 
 }
