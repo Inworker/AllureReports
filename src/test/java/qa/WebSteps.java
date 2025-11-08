@@ -13,42 +13,21 @@ import static io.qameta.allure.Allure.step;
 
 public class WebSteps {
 
-    @Step
-    public void openMainPage()
-    {
-        step("открываем нужный репозиторий GitHub",
-                () -> open("https://github.com/"));
-        attachment("Source", webdriver().driver().source());
-    }
-
-    @Step
-    public void searcForRepository(String repo)
-    {
-        // Открытие страницы перед каждым тестом
-        step("открываем нужный репозиторий GitHub",
-                () -> open("https://github.com/" + repo));
-    }
-
-
-    @Step
+    @Step("кликаем по кнопке Issues")
     public void openIssuesTab()
     {
-        step("кликаем по кнопке Issues ", () ->
-                $("#issues-tab [data-content='Issues']").click());
+        $("#issues-tab [data-content='Issues']").click();
     }
 
-    @Step
+    @Step("проверяем название Issue")
     public void shouldSeeIsueWithNumber(String issue)
     {
-        step("проверяем название Issue", () ->
-                $("a[href='/Inworker/AllureReports/issues/1']").shouldHave(Condition.exactText(issue)));
+        $("a[href='/Inworker/AllureReports/issues/1']").shouldHave(Condition.exactText(issue));
     }
 
-    @Step
+    @Step("проверяем что это тип ошибки")
     public void checkTabIssue(String issue)
     {
-        step("проверяем что это тип ошибки" + issue,
-                () -> $$(".prc-Text-Text-0ima0").findBy(Condition.text(issue)).shouldBe(Condition.visible));
-
+        $$(".prc-Text-Text-0ima0").findBy(Condition.text(issue)).shouldBe(Condition.visible));
     }
 }
