@@ -28,6 +28,6 @@ public class WebSteps {
     @Step("проверяем что это тип ошибки")
     public void checkTabIssue(String issue)
     {
-        $$(".prc-Text-Text-0ima0").findBy(Condition.text(issue)).shouldBe(Condition.visible));
+        $$(".prc-Text-Text-0ima0").findBy(Condition.text(issue)).shouldBe(Condition.visible);
     }
 }
